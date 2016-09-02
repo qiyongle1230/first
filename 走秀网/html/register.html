@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户注册</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />	
+		<link rel="stylesheet" href="../css/reset.css"/>
+		<script src="../js/zepto-1.1.6.min.js"></script>
+		<script src="../js/touch.js"></script>
+		<style>
+			body,html{
+				background: #f3eff0;
+				width:100%;
+			}
+			.register{
+				width:100%px;height:100%;
+			}
+			h2{
+				width:100%;
+				height:88px;
+				color: #fff;
+				background: #a90506;			
+				text-align: center;
+				line-height: 88px;
+				font-size: 38px;
+			}
+			h2 span{
+				float:left;
+				background: url(../img/fanhui_03.png) no-repeat;
+				width:44px;
+				height:40px;
+				margin-top:23px;
+				margin-left: 23px;	
+			}
+			.lis{
+				background: #fff;
+				width:560px;
+				height:86px;
+				border-radius: 10px;
+				font-size: 26px;
+				margin-top:32px;
+				margin-left:30px;
+				line-height:86px;
+				padding-left:20px;
+			}
+			.lis input{
+				width:400px;
+				height:50px;
+				border:0;
+				font-size: 26px;
+				padding-left:10px;
+			}
+			#btn{
+				height:84px;
+				width:574px;
+				background: url(../img/regester.png)repeat-x;
+				border:2px solid #820000;
+				margin-top:185px;
+				color:#fff;
+				font-size: 36px;
+				margin-left:30px;
+				border-radius: 15px;
+			}
+
+		</style>
+	</head>
+	
+		
+	<body>
+		<div class="register">
+			<h2><span></span>用户注册</h2>	
+			<div class="lis">
+				<span>账户名称 :</span><input type="text" placeholder="请输入账户" id="userName" autofocus required/>
+			</div>
+			<div class="lis">
+				<span>登录密码 :</span><input type="text" placeholder="请输入密码" id="password" required/>
+			</div>
+			<div class="lis">
+				<span>确认密码 :</span><input type="text" placeholder="请输入密码" id="again" required/>
+			</div>
+			<button id="btn">立即注册</button>
+							
+		</div>
+	</body>
+	<script>
+		 function bodyScale(){
+	        var devicewidth=document.documentElement.clientWidth;
+	        var scale=devicewidth/640;
+	        document.body.style.zoom=scale; 	        
+   		}
+	    $(function(){
+	       bodyScale();	     	        	
+	        $("#btn").on('touchend',function(){
+				var name = $("#userName").val(),
+	        		num = $('#password').val();				
+	        	if($('#again').val()==$('#password').val()&&$('#password').val()!=0){
+	        		$.ajax({
+			  			type:"get",
+			        	url:"http://datainfo.duapp.com/shopdata/userinfo.php",        	
+			        	async:true,
+			        	dataType:"json",
+			        	data:{status:'register',userID:name,password:num},
+			        	success:function(data){			        	
+			        		if(data==0){
+			        			alert('用户名存在');			        			
+			        		}else if(data==1){
+			        			alert('注册成功');
+			        			window.location.href="login.html";
+			        		}else if(data==2){
+			        			alert('重新注册')
+			        		}		        		
+			       		}
+	        		})
+	        	}else{
+	        		alert('密码不一致')
+	        	}
+        	})
+	    })
+	</script>
+</html>

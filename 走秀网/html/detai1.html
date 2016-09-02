@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品详情</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />	
+		<link rel="stylesheet" href="../css/reset.css"/>
+		<link rel="stylesheet" href="../icons/iconfont.css" />
+		<link rel="stylesheet" href="../css/swiper-3.3.1.min.css" />
+		<script src="../js/zepto-1.1.6.min.js"></script>
+		<script src="../js/touch.js"></script>
+		<script src="../js/iscroll.js" ></script>
+		<script src="../js/swiper-3.3.1.jquery.min.js"></script>
+		<style>
+			html{
+				height:100%
+			}
+			body{
+				background: #f7f7f7;
+				width:100%;
+				font-family: "微软雅黑";
+				height:100%;
+				display: -webkit-box;
+	            -webkit-box-orient: vertical;
+	            -webkit-box-align: center;
+			}
+			header{width:100%;}
+			header{
+				height:86px;
+				line-height: 86px;
+				background: url(../img/shangpin.png) repeat-x;
+				color:#fff;
+				display: -webkit-box;
+	            -webkit-box-orient: horizontal;
+			}
+			header i{
+				display: inline-block;
+				width:100px;
+				text-align: center;
+			}
+			header h2{
+				-webkit-box-flex:1;
+				text-align: center;
+				font-size: 30px;
+			}
+			header span{								
+				display: inline-block;
+				background: url(../img/car.png) no-repeat;
+				width:107px;
+				height:56px;
+				margin-top:15px;
+				margin-right:15px;
+			}
+			section{
+				width:90%;
+				-webkit-box-flex:2;	
+				padding-left:10%;
+				overflow:auto;
+				display: -webkit-box;
+				-webkit-box-orient:vertical ;				          		
+			}			
+			section img{
+				width:90%;
+				height:100%px;
+			}
+			section aside{
+				-webkit-box-flex: 1;
+				margin-top:5%;
+			}
+			section aside p{
+				font-size: 22px;
+				color:#8a8a8a;
+				margin:2% 0;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<header>
+			<i class="iconfont back">&#xe619;</i>
+			<h2>商品资料</h2>
+			<span></span>
+		</header>
+		<section>
+			<div>
+				<img class="pic" src="" alt="" />	
+				<img class="pic" src="" alt="" />
+				<img class="pic" src="" alt="" />
+			</div>
+			<aside class="wrap">
+		
+			</aside>
+		</section>
+		
+	</body>
+	<script>
+		function bodyScale(){
+			var devicewidth=document.documentElement.clientWidth;
+			var scale=devicewidth/640;
+			document.body.style.zoom=scale;
+		}
+		window.onload=window.onresize=function(){
+			bodyScale();
+		
+		    
+		var i = localStorage.getItem('ID');
+		getDetail(i,0);
+		function getDetail(goodsID,pageCode){
+				$.ajax({
+					type:'get',
+					url:'http://datainfo.duapp.com/shopdata/getGoods.php',
+					data:{goodsID:goodsID,pageCode:pageCode},
+					dataType:'jsonp',
+					success:function(data){
+						$.each(data,function(index){	
+							arr = JSON.parse(data[index].imgsUrl)
+							$('.pic').each(function(i){
+								$('.pic').eq(i).attr('src',arr[i]);
+							})
+							arr1 = data[0].detail.split('。');
+							var box = $('.wrap');
+							var name1=$("<p>"+arr1[0]+"</p>");
+							var name2=$("<p>"+arr1[1]+"</p>");
+							var name3=$("<p>"+arr1[2]+"</p>");
+							var name4=$("<p>"+arr1[3]+"</p>");
+							box.append(name1);
+							box.append(name2);
+							box.append(name3);
+							box.append(name4);
+						})
+					}
+				})
+			}
+		$('.back').on('touchend',function(){		
+			window.location.href="detail.html";
+		})
+		
+	}
+	</script>
+</html>

@@ -1,0 +1,112 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+html{
+	width:100%;
+	height:100%;
+}
+ul,ol{
+	list-style: none;
+}
+body{
+	width:1024px;
+	height:100%;
+	overflow: hidden;
+	font-family: "微软雅黑";
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+}
+/*以上是重置样式*/
+
+/*头部样式*/
+header{
+	width: 640px;
+	height: 88px;
+	background: url(../img/shangpin.png) repeat-x;
+	line-height: 80px;
+}
+#houtui{
+	margin-left: 25px;
+	text-decoration: none;
+}
+#houtui .ico{
+	font-size: 50px;
+	color: #fff;
+}
+header span{
+	font-size: 35px;
+	color: #fff;
+	margin-left: 170px;
+}
+#tuichu{
+	display: inline-block;
+	text-decoration: none;
+	font-size: 30px;
+	width: 150px;
+	height: 60px;
+	background-color: #c60808;
+	color: #fff;
+	border: 2px solid #860200;
+	border-radius: 10px;
+	margin-left: 63px;
+	line-height: 60px;
+	text-align: center;
+}
+section{
+	-webkit-box-flex: 1;
+}
+#zhuanpan{
+	width: 610px;
+	height: 568px;
+	background: #a90506;
+	margin: 14px;
+}
+#zhuanpan li{
+	width: 199px;
+	height: 186px;
+	float: left;
+	border: 1px solid #fff;
+}
+#kaishi{
+	background: #640000;
+	font-size: 58px;
+	color: #fff;
+	text-align: center;
+	line-height: 188px;
+}
+.bb{
+	background: blue;
+}
+
+#huojiang{
+	width: 610px;
+	height:100%;
+	margin:14px;
+	background: #ff4948;
+}
+#huojiang p{
+	display: block;
+	width: 580px;
+	height: 100px;
+	line-height: 100px;
+	color: #fff;
+	padding-left: 20px;
+
+}
+#huojiang .leval{
+	font-size: 22px;
+	margin-right: 40px;
+}
+#huojiang .cj-name{
+	font-size: 22px;
+	display: inline-block;
+	width:200px;
+	height:100px;
+	margin-right: 20px;
+}
+
+#huojiang .cj-time{
+	font-size: 22px;
+
+}

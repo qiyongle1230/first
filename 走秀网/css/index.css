@@ -1,0 +1,116 @@
+	html{height:100%;}
+	body{
+	            width:640px;
+	            height:100%;
+	            display: -webkit-box;
+	            display: -moz-box;
+	            -webkit-box-orient:vertical ;
+	            
+	        }
+			header{
+				width:640px;
+				height:87px;
+				line-height: 88px;
+				border-bottom: 1px solid #282828;
+			}
+			h2{
+				width:380px;
+				height:88px;
+				color: #fff;
+				background: #a90506;				
+				padding-left: 260px;
+				line-height: 88px;
+				font-size: 38px;				
+			}
+			h2 span{
+				float:right;
+				margin:20px 20px 0 0;
+				width:106px;
+				height:57px;
+				background: url(../img/car.png) no-repeat;
+			}			
+			nav{
+				width:640px;
+				height:57px;
+			}
+			section{
+				width: 100%;								
+				background: #f3f4f6;
+				overflow: auto;	
+				-webkit-box-flex: 1;   
+				-moz-box-flex: 1;        
+			}		
+			nav .icon{
+				width:600px;
+				height:57px;
+				 background: #9a9fa5;
+				line-height: 57px;
+				overflow: hidden;
+				padding-left:40px ;
+			}
+			nav li{
+				float:left;
+				margin-right:25px;				
+			}
+				
+			 .li{
+				margin:50px 35px 35px 35px;;
+				float:left;
+			}
+			 .list2{
+				width:235px;
+				height:235px;				
+				padding: 5px;
+				border: 1px solid #cacacc;
+			}
+			 .li img{
+				width:235px;
+				height:235px;
+			}
+			 .name{
+				width:245px;
+				margin:10px 0;
+				text-align: center;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.li p:nth-child(3){
+				font-size:24px ;
+				color:#d51210;
+			}
+			.li span{
+				float: right;
+				font-size: 20px;
+				color:#868686;
+				margin-right:15px;
+				text-decoration: line-through;
+			}
+			header,section,footer{margin:0;padding: 0;}
+
+footer{
+	width:100%;
+	height:98px;	
+}
+footer ul{
+	height:98px;
+	background: #484850;
+	border-top:1px solid #282828 ;
+	
+}
+footer li{				
+	width:127px;
+	height:98px;
+	padding-top:10px ;
+	float:left;
+	text-align: center;
+}
+footer li a{
+	display: block;
+	color: #fff;
+	margin-bottom: 10px;
+}
+footer li span{
+	display: block;
+	color:#fff;				
+}

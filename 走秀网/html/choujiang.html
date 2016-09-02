@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>标题</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="../css/choujiang.css"/>
+<link rel="stylesheet" type="text/css" href="../icons/iconfont.css"/>
+</head>
+<body>
+	<header>
+		<a href="javascript:;" id="houtui"><i class="iconfont ico">&#xe619;</i></a>
+		<span>新品上市</span>
+		<a href="../html/login.html" id="tuichu">退出登录</a>
+	</header>
+	<section>
+		<ul id="zhuanpan">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li id="kaishi">抽奖</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div id="huojiang"></div>
+	</section>
+</body>
+<script type="text/javascript" src="../js/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="../js/swiper-3.3.1.jquery.min.js"></script>
+<script type="text/javascript" src="../js/touch.js"></script>
+<script type="text/javascript" src="../js/iscroll.js"></script>
+
+<script type="text/javascript">
+//适应手机端屏幕
+function bodyScale(){
+	var devicewidth=document.documentElement.clientWidth;
+	if(devicewidth <= 640){
+		var scale=devicewidth/640;
+
+	}else if(devicewidth>640){
+		var scale=devicewidth/1024;
+	}
+		document.body.style.zoom = scale;
+	}
+	window.onload=window.onresize =function(){
+		bodyScale();
+
+	//退出登录
+	$('#tuichu').on('touchend',function(){
+		window.location.href = "index.html";
+	})
+	//抽奖验证结果提交
+					var z=true;
+					var lis = null;
+					var arr1 = null;
+					var n = 0;
+					var a = localStorage.getItem("userName");
+						$('#kaishi').on('touchend',function(){
+							if(z){
+								 lis=$('ul>li');
+								 arr1 = getarr();
+								//chou("a",0);
+							 	var speed=50;
+								var index=0;
+								var timer=null;
+								n=Math.floor(Math.random()*8);								
+								// chou("a",0);
+								if(a!=null){
+									//点击开始抽奖
+									$.ajax({
+										type: 'get',
+										url:'http://datainfo.duapp.com/lottery/fruitsubmit.php',
+										dataType:'json',
+										data:{userID:a},										
+										success:function(data){
+											console.log(a)
+											if(data == 0){
+												alert('用户已经抽过奖');						
+											}else if(data == 2){
+												move();
+											}
+										}
+									})		
+								}else{
+									alert('请去登录');
+								}								
+								z=false;
+							}
+								
+							
+						})	
+
+						function getarr(){
+								var arr=[];
+								arr[0]=lis[0];
+								arr[1]=lis[1];
+								arr[2]=lis[2];
+								arr[3]=lis[5];
+								arr[4]=lis[8];
+								arr[5]=lis[7];
+								arr[6]=lis[6];
+								arr[7]=lis[3];
+								return $(arr);				
+							}
+
+						//转动封装函数
+						//
+						var index = 0;
+
+						var speed = 50;
+						var timer = null;
+							function move(){
+								timer=setTimeout(function(){
+								speed+=50;
+								$(".bb").removeClass('bb');
+								arr1.eq(index).addClass('bb');
+								index++;
+								if(speed>500){
+									speed=500;
+								};
+								if(index>7){
+									index=0;
+								};
+								if(index-1==n&&speed>=500){
+										setTimeout(function(){
+											console.log(index,n);
+											clearTimeout(timer);
+											timer = null;
+											alert('恭喜你中了'+(n+1)+'等奖');
+										},50);
+								}else{
+									move();
+								};
+								},speed)
+
+							}
+
+
+// 获取中奖者名单
+	function centre(){
+		$.ajax({
+			type:'get',
+			url:'http://datainfo.duapp.com/lottery/getsuerfr.php',
+			dataType:'jsonp',
+			success:function(data){
+				console.log(data);
+				var str = '';
+				$.each(data,function(i){
+					if(i<4){
+						str+='<p><span class="leval">'+ (parseInt(data[i].fruit)+1) + '等奖</span><span class="cj-name">' + data[i].userID + '</span><span class="cj-time">' + data[i].timer+' </span> </p>'
+					}
+					$('#huojiang').html(str);
+				})
+
+			}
+		})
+	}
+			
+centre();
+
+
+}
+
+
+</script>
+</html>

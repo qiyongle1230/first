@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户管理</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />	
+		<link rel="stylesheet" href="../css/reset.css"/>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../icons/iconfont.css" />
+		<script src="../js/zepto-1.1.6.min.js"></script>
+		<style>
+			html{
+				height:100%
+			}
+			body{
+				background: #f7f7f7;
+				width:100%;
+				font-family: "微软雅黑";
+				height:100%;
+				display: -webkit-box;
+	            -webkit-box-orient: vertical;
+	            -webkit-box-align: center;
+			}
+			
+			header{
+				width:640px;            
+				border-bottom: 1px solid #282828;
+			}
+			h2{
+				width:380px;
+				height:88px;
+				color: #fff;
+				background: #a90506;				
+				padding-left: 260px;
+				line-height: 88px;
+				font-size: 38px;
+				
+			}
+			h2 span{
+				float:right;
+				margin:20px 20px 0 0;
+				width:106px;
+				height:57px;
+				background: url(../img/chongzhi.png) no-repeat;
+			}
+			section{
+				width:605px;
+				border-top:1px solid #636363 ;
+				padding-top: 72px ;
+				padding-left: 35px;
+				-webkit-box-flex: 1;
+			}
+			section dl{
+				height:322px;
+			}
+			section dt{
+				float:left;
+					
+			}
+			section dd{
+				float:left;
+				font-size: 36px;
+				margin-left:33px;
+				margin-top:30px;
+			}
+			section dd span{
+				margin-left:15px;
+			}
+			#num{
+				color:#f00202;
+			}
+			section ul{
+				width:555px;
+				border:2px solid #dedede;
+				border-radius: 15px;
+				background: #fff;
+			}
+			section li{
+				padding-left:25px;				
+				height:88px;
+				line-height:88px;
+				border-bottom: 2px solid #dedede;
+				background: url(../img/jiantou.png) no-repeat 500px center;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<header>
+			<h2>我的秀<span></span></h2>
+		</header>
+		<section>
+			<dl>
+				<dt><img src="../img/toux.png" alt="" /></dt>
+				<dd>
+					<p>昵称:<span id="user">未知</span></p>
+					<p>余额:<span id="num">0</span></p>
+				</dd>
+			</dl>
+			<ul>
+				<li>我的订单</li>
+				<li>我的优惠券</li>
+				<li>浏览记录</li>
+				<li style="border: 0">我的收藏</li>
+			</ul>
+		</section>
+		<footer>
+			<ul>
+				<li><a href="index.html"><i class="iconfont">&#xe644;</i></a><span>首页</span></li>
+				<li><a href="detail.html"><i class="iconfont">&#xe692;</i></a><span>分类</span></li>
+				<li><a href="shopcar.html:;"><i class="iconfont">&#xe61b;</i></a><span>购物车</span></li>
+				<li class="hot1"><a href="user.html"><i class="iconfont">&#xe646;</i></a><span>我的秀</span></li>
+				<li ><a href="javascript:;"><i style="font-size: 33px;font-weight: 600;font-style: normal;">···</i></a><span>更多</span></li>
+			</ul>
+		</footer>
+	</body>
+	<script>
+		function bodyScale(){
+			var devicewidth=document.documentElement.clientWidth;
+			var scale=devicewidth/640;
+			document.body.style.zoom=scale;
+		}
+		window.onload=window.onresize=function(){
+			bodyScale();
+		}
+		$(function(){
+			var a = localStorage.getItem('userName');
+			$('#user').html(a);
+		})
+	</script>
+</html>

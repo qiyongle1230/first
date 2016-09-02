@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户管理</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />	
+		<link rel="stylesheet" href="../css/reset.css"/>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../icons/iconfont.css" />
+		<script src="../js/zepto-1.1.6.min.js"></script>
+		<style>
+			html{
+				height:100%
+			}
+			body{
+				background: #f7f7f7;
+				width:100%;
+				font-family: "微软雅黑";
+				height:100%;
+				display: -webkit-box;
+	            -webkit-box-orient: vertical;
+	            -webkit-box-align: center;
+			}			
+			header{
+				width:100%;            
+				border-bottom: 1px solid #282828;
+			}
+			h2{
+				width:380px;
+				height:88px;
+				color: #fff;
+				background: #a90506;				
+				padding-left: 260px;
+				line-height: 88px;
+				font-size: 38px;				
+			}
+			h2 span{
+				float:right;
+				margin:20px 20px 0 0;
+				width:106px;
+				height:57px;
+				background: url(../img/jie.jpg) no-repeat;
+			}
+			section{
+				-webkit-box-flex: 1;
+				width:100%;
+				overflow: auto;
+			}
+			nav{
+				height:88px;
+				width: 100%;
+				border-top:1px solid #9a9fa5;
+				background: #747474;
+				color:#fff;
+				font-size: 30px;
+				line-height: 88px;
+				overflow: hidden;
+			}
+			nav p{
+				float:left;
+				margin-left:30px;
+			}
+			
+			section dl{
+				width:90%;
+				height:200px;
+				padding:5% 5%;
+				border-bottom:1px solid #aaaaaa;
+			}
+			section dt{
+				float:left;				
+			}
+			section img{
+				width:175px;
+				height:170px;
+			}
+			section dd{
+				width:320px;
+				float:left;
+				font-size: 28px;
+				color: #333;
+				margin-left:25px;
+			}
+			section dd p:nth-child(2){
+				margin:5px 0;
+			}
+			section dd p:nth-child(2) span{
+				color:#aa1a1a;				
+			}
+			section dd button{
+				width:60px;
+				height:42px;
+				border-radius: 10px;
+				outline: none;
+				color:#fff;
+				margin-left:10px;
+			}
+			section dd input{
+				width:75px;
+				height:42px;
+				border-radius: 10px;
+				outline: none;
+				text-align: center;
+				margin-left:10px;
+			}
+			#zong{
+				color:#a91b1a;
+				margin-left:20px;
+			}
+			section .delete{
+				width:28px;
+				height:35px;
+			}
+			section .delete img{
+				width:28px;
+				height:35px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h2>购物车<span></span></h2>
+		</header>
+		<nav>
+			<p>商品数量:<span id="num">0</span></p>
+			<p>应付总额(不含运费) :<span id="zong"></span></p>			
+		</nav>
+		<section class="car"></section>
+		<footer>
+			<ul>
+				<li><a href="index.html"><i class="iconfont">&#xe644;</i></a><span>首页</span></li>
+				<li><a href="list.html"><i class="iconfont">&#xe692;</i></a><span>分类</span></li>
+				<li><a href="shopcar.html"><i class="iconfont">&#xe61b;</i></a><span>购物车</span></li>
+				<li class="hot1"><a href="user.html"><i class="iconfont">&#xe646;</i></a><span>我的秀</span></li>
+				<li ><a href="javascript:;"><i style="font-size: 33px;font-weight: 600;font-style: normal;">···</i></a><span>更多</span></li>
+			</ul>
+		</footer>
+	</body>
+	<script>
+		function bodyScale(){
+			var devicewidth=document.documentElement.clientWidth;
+			var scale=devicewidth/640;
+			document.body.style.zoom=scale;
+		}
+		window.onload=window.onresize=function(){
+			bodyScale();
+			var arr = JSON.parse(localStorage.getItem("list"));
+			if(arr.length == 0){
+				$(".car").html("购物车空，快去购物吧");
+				$('.car').css({
+					fontSize:'50px',
+					color:'#000',
+					textAlign:'center',
+				})
+		
+			}else{
+				
+		
+			for(var i=0,len=arr.length;i<len;i++){	
+				console.log(arr[i].img)
+				var box = $("<dl></dl>");
+				var dt = $("<dt><img src=''/></dt>");
+				var dd = $('<dd></dd>');
+				var p1 = $("<p>"+arr[i].name+"</p>");
+				var p2 = $("<p>单价:￥<span class='pri'>"+arr[i].price+"元</span></p>")
+				var p3 = $("<p>数量:<button class='red'>-</button><input type='text' id='number' value="+arr[i].num+" /><button class='add'>+</button></p>")
+				var dd1 = $("<dd class='delete'><img src='../img/delete.jpg'/></dd>")
+				dd.append(p1);
+				dd.append(p2);
+				dd.append(p3);
+				box.append(dt);				
+				box.append(dd);
+				box.append(dd1);
+				$('.car').append(box);
+				for(var j=0;j<arr.length;j++){
+					$('dt img').eq(j).attr('src',arr[j].img);
+				}
+			}
+			addTo();
+			$('.red').on('touchend',function(){
+				var aa = $('.red').index($(this));
+				var b = parseInt($('input').eq(aa).val());
+				b-=1;
+				if(b<=1){
+					b = 1;
+				}			
+				$('input').eq(aa).val(b);
+				addTo();
+			})
+			$('.add').on('touchend',function(){
+				var bb = $('.add').index($(this));
+				var c = parseInt($('input').eq(bb).val());
+				 c += 1;
+				$('input').eq(bb).val(c);
+				addTo();
+			})
+			$('.delete').on('touchend',function(){
+				var cc = $('.delete').index($(this));
+				$('dl').eq(cc).remove();
+				addTo();
+				arr.splice(cc,1);
+				localStorage.setItem('list',JSON.stringify(arr));
+				if(arr.length == 0){
+					$(".car").html("购物车空，快去购物吧");
+					$('.car').css({
+						fontSize:'50px',
+						color:'#000',
+						textAlign:'center',
+					})
+				}
+			})
+						
+			function addTo(){
+				var sum = 0;
+				var count = 0;	
+				$('input').each(function(i){
+					sum += parseInt($('input').eq(i).val());
+					count += parseInt($('input').eq(i).val())*parseInt($('.pri').eq(i).html());
+				})								
+				$('#num').html(sum);
+				$('#zong').html('￥'+count);
+			}
+			
+		}	
+	}
+		
+	</script>
+</html>

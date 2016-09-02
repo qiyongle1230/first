@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户登录</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />	
+		<link rel="stylesheet" href="../css/reset.css"/>
+		<script src="../js/zepto-1.1.6.min.js"></script>
+		<style>
+			body{
+				background: #f3eff0;
+				width:640px;
+				font-family: "微软雅黑";
+			}
+			.login{
+				width:640px;
+			}
+			h2{
+				width:640px;
+				height:88px;
+				color: #fff;
+				background: #a90506;				
+				text-align: center;
+				line-height: 88px;
+				font-size: 38px;
+			}
+			.cont{
+				padding-left:30px;
+				width:410px;
+			}
+			.lis{
+				background: #fff;
+				width:560px;
+				height:86px;
+				border-radius: 10px;
+				font-size: 26px;
+				line-height:86px;
+				padding-left:20px;
+			}
+			.list{
+				margin-top:32px;
+				margin-bottom: 5px;
+			}
+			.lis input{
+				width:400px;
+				height:50px;
+				border:0;
+				font-size: 26px;
+				padding-left:10px;
+			}
+			.lis1{
+				font-size: 30px;
+				margin-top: 50px;
+				margin-left:20px;
+			}
+			.lis1 input{
+				width:38px;
+				height:38px;
+				
+			}
+			.lis1 i{
+				font-style: normal;
+				margin-left:40px;
+			}
+			.list1 i{
+				color:#fb0e52;
+			} 
+			#btn1{
+				height:84px;
+				width:574px;
+				background: url(../img/regester.png)repeat-x;
+				border:2px solid #820000;
+				margin-top:50px;
+				color:#fff;
+				font-size: 36px;
+				border-radius: 15px;
+			}
+			#btn2{
+				height:84px;
+				width:574px;
+				background: url(../img/login.png)repeat-x;
+				border:2px solid #820000;
+				margin-top:10px;
+				color:#fff;
+				font-size: 36px;
+				border-radius: 15px;
+			}
+
+		</style>
+	</head>
+	
+		
+	<body>
+		<div class="login">
+			<h2>开心摇摇用户登录</h2>
+			<div class="cont">
+				<div class="lis list">
+					<input type="text" placeholder="请输入账户" id="username" autofocus required/>
+				</div>
+				<div class="lis ">
+					<input type="password" placeholder="请输入密码" id="password" required/>
+				</div>
+				<div class="lis1 list1"><input type="checkbox" name="" id="check" value="" />&nbsp;&nbsp;<label for="check">显示密码</label><i>忘记密码</i></div>
+				<div class="lis1 "><input type="checkbox" name="" id="check1" value="" />&nbsp;&nbsp;<label for="check1">记住密码</label><i>自动登录</i></div>
+				
+				<button id="btn1">登录</button>
+				<button id="btn2">注册</button>				
+			</div>
+		</div>
+	</body>
+	<script>
+		function bodyScale(){
+		var devicewidth=document.documentElement.clientWidth;
+			var scale=devicewidth/640;
+			document.body.style.zoom=scale;
+		}
+		window.onload=window.onresize=function(){
+			bodyScale();
+		}
+	    $(function(){
+	               
+	       	$('#check').on('click',function(){
+	       		if($(this).attr('checked')){	       			
+	        		$('#password').prop('type','text');
+	        	}else{
+	        		$('#password').prop('type','password');
+	        	}
+	       	})
+	       	$('#btn1').on('click',function(){
+	       		var user ="";
+	       		$.ajax({
+		  			type:"get",
+		        	url:"http://datainfo.duapp.com/shopdata/userinfo.php",        	
+		        	async:true,
+		        	dataType:"json",
+		        	data:{status:'login',userID:$('#username').val(),password:$('#password').val()},
+		        	success:function(data){
+		        		if(data==0){
+		        			alert('用户名不存在')
+		        		}else if(data==2){
+		        			alert('用户名密码不正确')
+		        		}else{
+		        			alert('登录成功');
+		        			localStorage.setItem('userName',$('#username').val());
+		        			window.location.href="user.html";
+		        		}		        		
+		        	}
+		        })		        
+	       	})	
+	       	$('#btn2').on('touchend',function(){
+				window.location.href = "register.html"
+			})
+	    })
+	</script>    
+</html>

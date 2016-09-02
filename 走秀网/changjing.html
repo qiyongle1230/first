@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插件</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+    <script src="js/zepto-1.1.6.min.js"></script>
+    <script src="js/swiper-3.3.1.jquery.min.js"></script>
+    <script src="js/swiper.animate1.0.2.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body,html{
+            width:100%;
+            height:100%;
+        }
+        .all{
+        	background: #f8f3f7;
+            width:100%;
+            height:100%;
+        }
+        .p1,.p2,.p3,.p4,.p5{position: relative;}
+       	.p1-1{position: absolute;top: 15%;left:30%}
+       	.p1-2{position: absolute;bottom: 0;left:0}
+       	.p1-3{position: absolute;top:40%;left:30%}
+       	.p3-1{position: absolute;top: 10%;left:45%}
+       	.p3-2{position: absolute;top: 25%;left:35%}
+       	.p3-3{position: absolute;top: 33%;left:33%}
+       	.p3-4{position: absolute;bottom: 15%;left:15%}
+       	.p4-1{position: absolute;top:15%;left:30%;}
+       	.p4-2{position: absolute;top:35%;left:20%;}
+       	.p4-3{position: absolute;top:65%;left:30%;}
+       	.p5-1{position: absolute;top:10%;left:50%;}
+       	.p5-2{position: absolute;top:45%;left:20%;}
+       	.p5-3{position: absolute;top:75%;left:30%;cursor: pointer;}
+       	
+    </style>
+
+</head>
+<body>
+<div class="swiper-container all">
+    <div class="swiper-wrapper ul">
+        <div class="swiper-slide p1">
+            <img src="img/wei1.gif" alt="" class="ani p1-1"  swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="2s">
+            <img src="img/wei2.jpg" alt="" class="ani p1-2"  swiper-animate-effect="zoomIn" swiper-animate-duration="2s" swiper-animate-delay="1s">
+            <img src="img/wei3.jpg" alt="" class="ani p1-3"  swiper-animate-effect="bounceIn" swiper-animate-duration="2s" swiper-animate-delay="">
+        </div>
+      
+        <div class="swiper-slide p2">
+          	<img src="img/wei4.png" alt="" class="p2-1">
+            <img src="img/wei5.png" alt="" class="p2-2">         
+        </div>
+        <div class="swiper-slide p3">
+          	<img src="img/wei6.jpg" alt="" class="ani p3-1"  swiper-animate-effect="flash" swiper-animate-duration="2s" swiper-animate-delay="">
+            <img src="img/wei7.jpg" alt="" class="ani p3-2"  swiper-animate-effect="swing" swiper-animate-duration="2s" swiper-animate-delay="1s">
+            <img src="img/wei8.jpg" alt="" class="ani p3-3"  swiper-animate-effect="bounceIn" swiper-animate-duration="2s" swiper-animate-delay="1s">
+        	<img src="img/wei9.jpg" alt="" class="ani p3-4"  swiper-animate-effect="bounceIn" swiper-animate-duration="2s" swiper-animate-delay="">
+        </div>
+        <div class="swiper-slide p4">
+            <img src="img/wei10.jpg" alt="" class="ani p4-1"  swiper-animate-effect="zoomIn" swiper-animate-duration="2s" swiper-animate-delay="">
+            <img src="img/wei11.jpg" alt="" class="ani p4-2"  swiper-animate-effect="swing" swiper-animate-duration="2s" swiper-animate-delay="1s">
+            <img src="img/wei12.jpg" alt="" class="p4-3"  >
+        	
+        </div>
+        <div class="swiper-slide p5">
+            <img src="img/wei13.jpg" alt="" class="ani p5-1"  swiper-animate-effect="bounceIn" swiper-animate-duration="2s" swiper-animate-delay="">
+            <img src="img/wei14.jpg" alt="" class="ani p5-2"  swiper-animate-effect="bounceIn" swiper-animate-duration="2s" swiper-animate-delay="1s">
+            <img src="img/wei15.jpg" alt="" class="ani p5-3"  swiper-animate-effect="bounceIn" swiper-animate-duration="2s" swiper-animate-delay="2s">
+        </div>
+       <div></div>
+      
+    </div>
+ 		<!-- 如果需要分页器 -->
+    	<div class="swiper-pagination"></div>
+
+</div>
+</body>
+<script>
+    function bodyScale(){
+        var devicewidth=document.documentElement.clientWidth;
+        var scale=devicewidth/640;
+        document.body.style.zoom=scale;
+    }
+    window.onload=function(){
+        bodyScale();
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal',
+            
+            
+             // 如果需要分页器
+    		pagination: '.swiper-pagination',
+    		paginationClickable:true,
+			
+   			 
+            onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+                swiperAnimateCache(swiper); //隐藏动画元素
+                swiperAnimate(swiper); //初始化完成开始动画
+            },
+            onSlideChangeEnd: function(swiper){
+                swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+            }           
+
+        })
+        
+       	$('.p5-3').on("touchend",function(){
+        	window.location.href = 'html/index.html';
+        })
+/*        $.ajax({
+  			type:"POST",
+        	url:"http://datainfo.duapp.com/shopdata/userinfo.php",        	
+        	async:true,
+        	dataType:"json",
+        	data:{status:register,userID:"",password:""},
+        	success:function(data){
+        		if(data==0){
+        			
+        		}
+        		if(data==1){
+        			
+        		}
+        		if(data==2){
+        			
+        		}
+        	}
+        })
+        $.ajax({
+  			type:"GET",
+        	url:"http://datainfo.duapp.com/shopdata/userinfo.php",        	
+        	async:true,
+        	dataType:"json",
+        	data:{status:login,userID:"",password:""},
+        	success:function(data){
+        		if(data==0){
+        			
+        		}
+        		
+        		if(data==2){
+        			
+        		}
+        	}
+        })
+         $.ajax({
+  			type:"GET",
+        	url:"http://datainfo.duapp.com/shopdata/getclass.php",        	
+        	dataType:"json",
+        	
+        	success:function(data){
+        		$.each(data,function(index){
+        			console.log(data[index].icon)
+        		})
+        	}
+        })
+        function(){
+        	$.ajax({
+  			type:"GET",
+        	url:"http://datainfo.duapp.com/shopdata/getclass.php",        	
+        	dataType:"json",
+        	date:{classID:classID,}
+        	success:function(data){
+        		$.each(data,function(index){
+        			console.log(data[index].icon)
+        		})
+        	}
+
+
+        	})
+        }
+        
+*/
+    }
+</script>
+</html>
